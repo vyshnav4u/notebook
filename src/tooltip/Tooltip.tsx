@@ -1,8 +1,15 @@
 import React, { useRef, useState } from 'react';
 import './Tooltip.css';
 
-const HORIZONTAL_OFFSET = 5;
+const HORIZONTAL_OFFSET = 10;
 const VERTICAL_OFFSET = 5;
+const arrowClassMap = {
+	top: 'arrow-at-box-bottom',
+	bottom: 'arrow-at-box-top',
+	left: 'arrow-at-box-right',
+	right: 'arrow-at-box-left',
+};
+
 export enum EToolTipPosition {
 	TOP = 'top',
 	BOTTOM = 'bottom',
@@ -23,7 +30,12 @@ export interface ITooltip {
 }
 
 const Tooltip = (props: ITooltip) => {
-	const { children, tooltipContent, delay, position: toolTipPosition } = props;
+	const {
+		children,
+		tooltipContent,
+		delay,
+		position: toolTipPosition = EToolTipPosition.BOTTOM,
+	} = props;
 	const { title, body } = tooltipContent;
 	const [tooltipVisibility, setTooltipVisibility] = useState(false);
 	const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
@@ -77,6 +89,7 @@ const Tooltip = (props: ITooltip) => {
 		setTooltipVisibility(false);
 	};
 
+    const tooltipArrowClass = arrowClassMap[toolTipPosition];
 	return (
 		<div
 			ref={toolTipWrapRef}
@@ -89,7 +102,7 @@ const Tooltip = (props: ITooltip) => {
 				<div
 					ref={toolTipRef}
 					style={tooltipStyle}
-					className="tooltip-container"
+					className={`tooltip-container tooltip-arrow ${tooltipArrowClass}`}
 				>
 					{title && <h3 className="tooltip-title"> {title} </h3>}
 					{<p> {body} </p>}

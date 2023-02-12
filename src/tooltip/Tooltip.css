@@ -3,19 +3,55 @@
 	position: relative;
 }
 
-.tooltip-container{
-    background: #fff;
-    border: 1px solid #e6e6e6;
-    color: #191919;
-    padding: 6px 12px;
-    font-size: 12px;
-    z-index: 100;
-    line-height: 1.2;
-    position: absolute;
+.tooltip-container {
+	background: #fff;
+	border: 1px solid #e6e6e6;
+	color: #191919;
+	padding: 6px 12px;
+	font-size: 12px;
+	z-index: 100;
+	line-height: 1.2;
+	position: absolute;
 }
 
-.tooltip-title{
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 4px;
+.tooltip-title {
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.tooltip-arrow::after {
+	content: '';
+	position: absolute;
+	border-width: 8px;
+	border-style: solid;
+}
+
+.arrow-at-box-top::after {
+	border-color: transparent transparent #e6e6e6 transparent;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -8px;
+}
+
+.arrow-at-box-bottom::after {
+	border-color: #e6e6e6 transparent transparent transparent;
+	top: 100%;
+	left: 50%;
+	margin-left: -8px;
+}
+
+.arrow-at-box-right::after {
+	border-color: transparent transparent transparent #e6e6e6;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 100%;
+	margin-right: -8px;
+}
+
+.arrow-at-box-left::after {
+	border-color: transparent #e6e6e6 transparent transparent;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 100%;
 }
