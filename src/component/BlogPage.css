@@ -1,0 +1,19 @@
+.blog-page{
+    display: flex;
+    gap: 12px;
+    flex-direction: row;
+    min-height: 90vh;
+    width: 100%;
+}
+
+.left-sidebar{
+ width: 25%;  
+}
+
+.right-sidebar{
+    width: 25%;
+}
+
+.main{
+    width: 50%;
+}
