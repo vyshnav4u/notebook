@@ -1,5 +1,6 @@
 import React from 'react'
 import "./BlogPage.css"
+import MainContext from './MainContext';
 
 const LEFT_SIDEBAR_WIDTH = 25;
 const RIGHT_SIDEBAR_WIDTH = 25;
@@ -20,7 +21,7 @@ const BlogPage = () => {
   return (
     <div className='blog-page' style={containerStyle}>
         <aside className='left-sidebar' style={sidebarStyle}> Left</aside>
-        <main className='main'> Main </main>
+        <main className='main'> <MainContext /> </main>
         <aside className='right-sidebar' style={sidebarStyle}> Right </aside>
     </div>
   )
