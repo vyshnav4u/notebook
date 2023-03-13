@@ -1,4 +1,4 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IDispatch, IRootState } from '../store/store';
 
@@ -17,10 +17,20 @@ type IDispatchProps = ReturnType<typeof mapDispatch>;
 type IMainContext = IStateProps & IDispatchProps;
 
 const MainContext = (props: IMainContext) => {
-	const { count, increment, annotation, updateAnnotation } = props;
+	const { increment, annotation, updateAnnotation, count } = props;
 	const handleNe = ()=>{
 		updateAnnotation({show: !annotation.show});
 	}
+
+	// useEffect(()=>{
+	// 	console.log('count modified');
+		
+	// }, [count])
+
+	useEffect(()=>{
+		console.log('annotation modified');
+		
+	}, [annotation])
 	return (
 		<div className='ss'>
 			<h2>Total Count: {count}</h2>

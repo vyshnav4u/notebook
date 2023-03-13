@@ -5,16 +5,16 @@ export const count = {
   reducers: {
     // handle state changes with pure functions
     increment(state: number, payload: number) {
+      console.log('stet rein');
+      
       return state + payload;
     },
   },
   effects: (dispatch: IDispatch) => ({
-    // handle state changes with impure functions.
-    // use async/await for async actions
-    async incrementAsync(payload: number, state: IRootState) {
-      console.log("This is current root state", state);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      dispatch.count.increment(payload);
+    increment(payload: number, rootState: IRootState) {
+      console.log('eff', payload);
+      
+      dispatch.annotation.update({show: !!(payload % 2)})
     },
   }),
 };

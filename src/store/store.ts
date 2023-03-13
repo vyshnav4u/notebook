@@ -8,3 +8,7 @@ export const store = init({
 export type IStore = typeof store;
 export type IDispatch = RematchDispatch<IRootModel>;
 export type IRootState = RematchRootState<IRootModel>;
+
+store.subscribe(()=>{
+	const currentValue =store.getState();
+})

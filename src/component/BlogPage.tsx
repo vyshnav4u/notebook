@@ -1,6 +1,8 @@
 import React from 'react'
+import { MinatoImage } from '../assets/images/minato';
 import "./BlogPage.css"
 import MainContext from './MainContext';
+import PhotoViewer from './photoviewer/PhotoViewer';
 
 const LEFT_SIDEBAR_WIDTH = 25;
 const RIGHT_SIDEBAR_WIDTH = 25;
@@ -21,7 +23,9 @@ const BlogPage = () => {
   return (
     <div className='blog-page' style={containerStyle}>
         <aside className='left-sidebar' style={sidebarStyle}> Left</aside>
-        <main className='main'> <MainContext /> </main>
+        <main className='main'> <MainContext /> 
+        <PhotoViewer src={MinatoImage} />         
+        </main>
         <aside className='right-sidebar' style={sidebarStyle}> Right </aside>
     </div>
   )

@@ -17,7 +17,15 @@ export const annotation = createModel<IRootModel>()({
 	state: initialState,
 	reducers: {
 		update(state: IAnnotation, payload: Partial<IAnnotation>) {
+			console.log('state', state);
+			console.log('payload', payload);
+			
 			return { ...state, ...payload };
 		},
 	},
+	effects: {
+		update(){
+			
+		}
+	}
 });
