@@ -11,7 +11,8 @@ const CONTENT_WIDTH = 50;
 const colorPalette = {
 	primary: '#bb86fc',
 	secondary: '#03dac5',
-	background: '#121212',
+	// background: '#121212',
+	background: '#fff',
 	secondaryBackground: '#1e1e1e',
 	font: '#e1e1e1'
 }
