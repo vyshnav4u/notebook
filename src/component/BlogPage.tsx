@@ -13,7 +13,8 @@ const colorPalette = {
 	secondary: '#03dac5',
 	// background: '#121212',
 	background: '#fff',
-	secondaryBackground: '#1e1e1e',
+	// secondaryBackground: '#1e1e1e',
+	secondaryBackground: '#fff',
 	font: '#e1e1e1'
 }
 

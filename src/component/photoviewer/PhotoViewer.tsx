@@ -15,11 +15,11 @@ const PhotoViewer: React.FC<IPhotoViewer> = (props) => {
 	};
 
 	if (showInFullScreen) {
-		return <FullScreenPhotoViewer src={src} />;
+		return <FullScreenPhotoViewer setShowInFullScreen={setShowInFullScreen} src={src} />;
 	}
 	return (
 		<div role="button" onClick={viewImageInFullScreen}>
-			<img src={src} height={height} width={width} />
+			<img className='photo-viewer-image' src={src} height={height} width={width} />
 		</div>
 	);
 };

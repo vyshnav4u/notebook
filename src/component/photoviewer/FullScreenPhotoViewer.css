@@ -15,6 +15,34 @@
 }
 
 .pv-fullscreen-image{
+    position: absolute;
     height: 80%;
     width: auto;
+    cursor: move;
+    transition: transform ease-in-out 500ms;
+    user-select: none;
+}
+
+.pv-fullscreen-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 75px;
+    font-weight: normal;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 0 100%;
+}
+
+.pv-fullscreen-close-icon{
+    position: absolute;
+    top: 18px;
+    right: 30px;
+    font-size: 16px;
+    color: #cbcbcb;
+    user-select: none;
+}
+
+.pv-fullscreen-close:hover .pv-fullscreen-close-icon{
+    color: #fff;
 }
