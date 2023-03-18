@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './FullScreenPhotoViewer.css';
+import ZoomMeta from './ZoomMeta';
 
 interface IFullScreenPhotoViewer {
 	src: string;
@@ -13,13 +14,17 @@ interface IMousePosition {
 
 const ZOOM_OUT = 0.8;
 const ZOOM_IN = 1.2;
+let timeoutShowZoomInfo: ReturnType<typeof setTimeout> | null;
 
+
+//todo: move draggable as separate component
 const FullScreenPhotoViewer: React.FC<IFullScreenPhotoViewer> = (props) => {
 	const { src, setShowInFullScreen } = props;
 	const imageContainerRef: React.MutableRefObject<HTMLDivElement | null> =
 		useRef(null);
 	const imageRef: React.MutableRefObject<HTMLImageElement | null> =
 		useRef(null);
+	const [showZoomInfo, setShowZoomInfo] = useState(false);
 	const [imageZoomLevel, setImageZoomLevel] = useState(1);
 	const [isImagePressed, setIsImagePressed] = useState(false);
 	const [imagePosition, setImagePosition] = useState<IMousePosition>();
@@ -27,12 +32,42 @@ const FullScreenPhotoViewer: React.FC<IFullScreenPhotoViewer> = (props) => {
 		setShowInFullScreen(false);
 	};
 	const handleKeyPress = (e: KeyboardEvent) => {
+		console.log('e.key', e.key);
+
 		if (e.key === ' ') {
 			imageContainerRef.current?.classList.toggle('solid-bg');
 		}
 
 		if (e.key === 'Escape') {
 			closeFullScreen();
+		}
+
+		switch (e.key) {
+			case '':
+				imageContainerRef.current?.classList.toggle('solid-bg');
+				break;
+			case 'Escape':
+				closeFullScreen();
+				break;
+			case 'ArrowUp':
+				setImageZoomLevel((prevImageZoomLevel) => {
+					const newZoomLevel = prevImageZoomLevel * ZOOM_IN;
+					if (newZoomLevel < 100) {
+						return newZoomLevel;
+					}
+					return prevImageZoomLevel;
+				});
+				break;
+			case 'ArrowDown':
+				setImageZoomLevel((prevImageZoomLevel) => {
+					const newZoomLevel = prevImageZoomLevel * ZOOM_OUT;
+					if (newZoomLevel > 0.2) {
+						return newZoomLevel;
+					}
+					return prevImageZoomLevel;
+				});
+				break;
+			default:
 		}
 	};
 
@@ -49,6 +84,17 @@ const FullScreenPhotoViewer: React.FC<IFullScreenPhotoViewer> = (props) => {
 			setIsImagePressed(false);
 		});
 	}, []);
+
+	useEffect(() => {
+		if(imageZoomLevel === 1) return;
+		if (timeoutShowZoomInfo) {
+			clearTimeout(timeoutShowZoomInfo);
+		}
+		setShowZoomInfo(true);
+		timeoutShowZoomInfo = setTimeout(() => {
+			setShowZoomInfo(false);
+		}, 2500);
+	}, [imageZoomLevel]);
 
 	const handleZoom = (e: React.WheelEvent<HTMLDivElement>) => {
 		const { deltaY } = e;
@@ -88,9 +134,7 @@ const FullScreenPhotoViewer: React.FC<IFullScreenPhotoViewer> = (props) => {
 		imageStyle.top = `${imagePosition.y}px`;
 		imageStyle.left = `${imagePosition.x}px`;
 	}
-	console.log('imageZoomLevel', imageZoomLevel);
-	console.log('imagePosition', imagePosition);
-	
+
 	return (
 		<div
 			onMouseMove={updateMousePosition}
@@ -111,6 +155,7 @@ const FullScreenPhotoViewer: React.FC<IFullScreenPhotoViewer> = (props) => {
 				className="pv-fullscreen-image"
 				src={src}
 			/>
+			{showZoomInfo && <ZoomMeta imageZoomLevel={imageZoomLevel} />}
 		</div>
 	);
 };

@@ -27,22 +27,36 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 100px;
+    width: 75px;
     height: 75px;
-    font-weight: normal;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 0 0 0 100%;
 }
 
 .pv-fullscreen-close-icon{
     position: absolute;
-    top: 18px;
-    right: 30px;
-    font-size: 16px;
+    top: 6px;
+    right: 16px;
+    font-size: 24px;
+    font-family: cursive;
+    font-weight: lighter;
     color: #cbcbcb;
     user-select: none;
 }
 
 .pv-fullscreen-close:hover .pv-fullscreen-close-icon{
     color: #fff;
+}
+
+.pv-fullscreen-zoom-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50px;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 6px;
+    z-index: 99;
+    transition: all ease-in-out 500ms;
 }
