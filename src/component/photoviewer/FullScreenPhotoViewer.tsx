@@ -73,16 +73,11 @@ const FullScreenPhotoViewer: React.FC<IFullScreenPhotoViewer> = (props) => {
 	const updateMousePosition = (
 		e: React.MouseEvent<HTMLImageElement, MouseEvent>
 	) => {
-		if (imageRef.current && isImagePressed) {
+		if (imagePosition && isImagePressed) {
 			const { movementX, movementY } = e;
-			const positionInfo = imageRef.current.getBoundingClientRect();
-			const newImagePositionX = movementX + positionInfo.x;
-			const newImagePositionY = movementY + positionInfo.y;
-			const halfElementWidth = positionInfo.width / 2;
-			console.log('newImagePositionX', newImagePositionX, newImagePositionY);
-			if (newImagePositionX + halfElementWidth > 0) {
-				setImagePosition({ x: newImagePositionX, y: newImagePositionY });
-			}
+			const newImagePositionX = movementX + imagePosition.x;
+			const newImagePositionY = movementY + imagePosition.y;
+			setImagePosition({ x: newImagePositionX, y: newImagePositionY });
 		}
 	};
 
@@ -93,7 +88,9 @@ const FullScreenPhotoViewer: React.FC<IFullScreenPhotoViewer> = (props) => {
 		imageStyle.top = `${imagePosition.y}px`;
 		imageStyle.left = `${imagePosition.x}px`;
 	}
-
+	console.log('imageZoomLevel', imageZoomLevel);
+	console.log('imagePosition', imagePosition);
+	
 	return (
 		<div
 			onMouseMove={updateMousePosition}
